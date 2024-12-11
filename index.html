@@ -10,9 +10,77 @@
 <body class="rtl">
 <main class="main-container">
     <header class="main-header">
-        <button tabindex="0" class="button-close">
-        </button>
+        <button tabindex="0" class="button-close" aria-label="Close"></button>
     </header>
+    <section class="inner">
+       <div class="title-wrap">
+           <h2 class="title">
+               חשמלית משפחתית מחכה לכם באולמות התצוגה
+           </h2>
+           <h3 class="subtitle">
+               השאירו פרטים ונעשה את זה EASY
+           </h3>
+       </div>
+        <div class="form-wrap">
+            <p class="notice">
+                כל השדות המסומנים ב-* הינם חובה
+            </p>
+            <form action="" id="form" class="form">
+                <label>
+                    <input type="text"
+                           class="form-input"
+                           tabindex="0"
+                           id="fname"
+                           placeholder="שם מלא*"
+                           onfocus="this.placeholder=''"
+                           onblur="this.placeholder='שם מלא*'"
+                    >
+                    <input type="tel"
+                           class="form-input"
+                           tabindex="0"
+                           id="phoneNum"
+                           maxlength="10"
+                           placeholder="נייד*"
+                           onfocus="this.placeholder=''"
+                           onblur="this.placeholder='נייד*'"
+                    >
+                    <span class="dropdown-wrap">
+                      <label for="dropdown" class="dropdown-label">אולם תצוגה</label>
+                      <select id="dropdown" class="dropdown-select">
+                        <option disabled selected></option>
+                        <option>תל אביב</option>
+                        <option>נוף גליל</option>
+                        <option>ראשון לציון</option>
+                        <option>טבריה</option>
+                        <option>רעננה</option>
+                        <option>חיפה</option>
+                        <option>אשדוד</option>
+                        <option>אשקלון</option>
+                        <option>באר שבע</option>
+                        <option>דימונה</option>
+                      </select>
+                    </span>
+
+
+                    <input type="email"
+                           class="form-input"
+                           tabindex="0"
+                           id="email"
+                           maxlength="10"
+                           placeholder="מייל*"
+                           onfocus="this.placeholder=''"
+                           onblur="this.placeholder='מייל*'"
+                    >
+                </label>
+            </form>
+        </div>
+    </section>
 </main>
+<script>
+    let regex = /^0(5[^7]|[2-4]|[8-9]|7[0-9])[0-9]{7}$/;
+    document.getElementById("form").addEventListener("submit", function (event){
+        event.preventDefault();
+    })
+</script>
 </body>
 </html>

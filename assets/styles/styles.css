@@ -1,7 +1,21 @@
+@import url('https://fonts.googleapis.com/css2?family=Assistant:wght@200..800&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&family=Sour+Gummy:ital,wght@0,100..900;1,100..900&display=swap');
+
+:root{
+    font-size: 10px;
+    --input-font-size: 1.4rem
+}
+
 .rtl{direction: rtl;}
 .ltr{direction: ltr;}
+ body{
+     font-family: "Assistant", sans-serif;
+ }
+
 .main-container{
     background-color: #fff;
+    color: #fff;
+    display: flex;
+    flex-direction: column;
 }
 .main-header {
     background-color: #00D6D1;
@@ -22,44 +36,133 @@
     transition: transform 0.25s ease-in-out;
     transform-origin: center;
 
-&:hover {
-    transform: rotate(180deg);
-}
-
-&:before,&:after {
-    content: "";
-    position: absolute;
-    display: block;
-    margin: auto;
-    left: 0;
-    right: 0;
-    top: 0;
-    bottom: 0;
-    width: var(--size);
-    height: 0;
-    border-top: 3px solid #000;
-    transform-origin: center;
-}
-
-&:before {
-    transform: rotate(45deg);
-}
-&:after {
-    transform: rotate(-45deg);
-}
-
-.icon {
-    background-blend-mode: darken;
-}
-
-}
-@media all and (max-width: 1024px) {
-    .main-container {
-        max-width: 92vw;
-        width: 100%;
-        margin-inline: auto;
+    &:hover {
+        transform: rotate(180deg);
     }
 
-    .main-header {
+    &:before,&:after {
+        content: "";
+        position: absolute;
+        display: block;
+        margin: auto;
+        left: 0;
+        right: 0;
+        top: 0;
+        bottom: 0;
+        width: var(--size);
+        height: 0;
+        border-top: 3px solid #000;
+        transform-origin: center;
+    }
+
+    &:before {
+        transform: rotate(45deg);
+    }
+    &:after {
+        transform: rotate(-45deg);
+    }
+}
+.main-container .inner{
+    background-color: #000;
+    padding-inline: 2rem;
+    padding-bottom: 1rem;
+    height: calc(100vh - 40px);
+
+    .title-wrap{
+        text-align: center;
+        color: #fff;
+        margin-block: 1rem;
+    }
+    .title{
+        font-size: 3.2rem;
+        line-height: 1;
+        text-wrap: balance;
+        font-weight: 400;
+    }
+    .subtitle{
+        font-size: 2.4rem;
+        margin-top: 1rem;
+        font-weight: 40;
+        line-height: 1;
+    }
+}
+.form-wrap{
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+    .notice{
+        font-size: var(--input-font-size);
+    }
+}
+.form{
+    margin-top: 1.5rem;
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    .dropdown-wrap{
+        position: relative;
+        width: 100%;
+        margin: 20px auto;
+        display: block;
+    }
+    .dropdown-label{
+        font-size: 14px;
+        position: absolute;
+        display: inline-block;
+        z-index: 1;
+    }
+    .dropdown-select{
+        width: 100%;
+        padding: 1rem;
+        font-size: var(--input-font-size);
+        background-color: #000;
+        color: #fff;
+        border: none;
+        border-bottom: 1px solid #fff;
+        appearance: none;
+        -webkit-appearance: none;
+        -moz-appearance: none;
+        cursor: pointer;
+        &:focus{outline: none;}
+        option {
+            background-color: #fff;
+            color: #000;
+            font-size: var(--input-font-size);
+        }
+    }
+}
+.form-input {
+    width: 100%;
+    border: none;
+    border-bottom: 1px solid #fff;
+    background-color: #000;
+    height: 5.7rem;
+    color: #fff;
+    font-size: 1.8rem;
+    &:focus{outline: none;}
+}
+.form-input::placeholder{
+     font-size: 1.8rem; color: #fff
+ }
+
+input[type="tel"] {
+    text-align: left;
+    direction: ltr;
+}
+
+.rtl input[type="tel"]::placeholder {
+    text-align: right;
+    direction: rtl;
+}
+@media all and (max-width: 768px){
+    .main-container{
+        max-width: 100vw;
+    }
+}
+@media all and (min-width: 769px) and (max-width: 1024px) {
+    .main-container {
+        max-width: 98vw;
+        width: 100%;
+        margin-inline: auto;
     }
 }

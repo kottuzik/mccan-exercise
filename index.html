@@ -35,18 +35,27 @@
                            onfocus="this.placeholder=''"
                            onblur="this.placeholder='שם מלא*'"
                     >
+                    <span class="error-text">
+                        שדה חובה
+                    </span>
+                </label>
+                <label>
                     <input type="tel"
                            class="form-input"
                            tabindex="0"
-                           id="phoneNum"
+                           id="phone"
                            maxlength="10"
                            placeholder="נייד*"
                            onfocus="this.placeholder=''"
                            onblur="this.placeholder='נייד*'"
                     >
+                    <span class="error-text">
+                        שדה חובה ויש לרשום מספר ישראלי
+                    </span>
+                </label>
                     <span class="dropdown-wrap">
-                      <label for="dropdown" class="dropdown-label">אולם תצוגה</label>
-                      <select id="dropdown" class="dropdown-select">
+                      <label for="dropdown" class="dropdown-label" tabindex="0">אולם תצוגה</label>
+                      <select id="dropdown" class="dropdown-select" tabindex="1">
                         <option disabled selected></option>
                         <option>תל אביב</option>
                         <option>נוף גליל</option>
@@ -60,8 +69,8 @@
                         <option>דימונה</option>
                       </select>
                     </span>
-
-
+                <span class="error-text"></span>
+                <label>
                     <input type="email"
                            class="form-input"
                            tabindex="0"
@@ -71,7 +80,29 @@
                            onfocus="this.placeholder=''"
                            onblur="this.placeholder='מייל*'"
                     >
+                    <span class="error-text">
+                        שדה חובה או שהמייל לא חוקי
+                    </span>
                 </label>
+                <label class="agree-checkbox">
+                    <input type="checkbox" class="checkbox">
+                    <span class="checkmark"></span>
+                    <span class="text">
+                        מאשר קבלת דיוור ותוכן שיווקי ופרסומי מהחברות השונות בקבוצת  באמצעות סמס, וואטסאפ, דואר אלקטרוני, וחיוג אוטומטי. רשימת *החברות המפורטות במדיניות פרטיות של האתר
+                    </span>
+                </label>
+              <footer class="form-footer">
+                  <button
+                          id="submit-button"
+                          class="button button-blue">
+                      חזרו אלי טלפונית
+                  </button>
+                  <button
+                          id="button"
+                          class="button button-transparent">
+                      למינוי חודשי אונליין
+                  </button>
+              </footer>
             </form>
         </div>
     </section>
@@ -81,6 +112,115 @@
     document.getElementById("form").addEventListener("submit", function (event){
         event.preventDefault();
     })
+
+
+    document.addEventListener('DOMContentLoaded', function () {
+        const selectElement = document.getElementById('dropdown');
+        const labelElement = document.querySelector('.dropdown-label');
+        const defaultLabelText = 'אולם תצוגה'; // Save the original label text
+
+        // Restore label or clear it on change
+        selectElement.addEventListener('change', function () {
+            if (selectElement.selectedIndex === 0) {
+                labelElement.textContent = defaultLabelText; // Restore label text
+            } else {
+                labelElement.textContent = ''; // Clear the label text
+            }
+        });
+
+        // Open dropdown when label is focused
+        labelElement.addEventListener('focus', function () {
+            selectElement.focus(); // Simulate focus on the dropdown
+            selectElement.size = selectElement.options.length; // Expand dropdown
+        });
+
+        // Collapse dropdown when focus is lost from the dropdown
+        selectElement.addEventListener('blur', function () {
+            selectElement.size = 0; // Collapse dropdown
+        });
+    });
+
+    function validateInputs() {
+        const inputs = [
+            document.getElementById('fname'),
+            document.getElementById('email'),
+            document.getElementById('phone')
+        ]; // Get the input fields
+
+        let isValid = true;
+
+        for (const input of inputs) {
+            if (!input.value.trim()) {
+                input.classList.add('error'); // Add 'error' class to the field
+                isValid = false; // Mark as invalid
+            } else {
+                input.classList.remove('error'); // Remove 'error' class if valid
+            }
+        }
+
+        // Validate phone input format (Israeli phone number)
+        const phoneInput = document.getElementById('phone');
+        const phonePattern = /^\+?972-?\d{9}$|^0\d{1,2}-?\d{7}$/; // Israeli phone number regex
+        if (phoneInput.value.trim() && !phonePattern.test(phoneInput.value.trim())) {
+            phoneInput.classList.add('error');
+            isValid = false;
+        } else if (phoneInput.value.trim()) {
+            phoneInput.classList.remove('error');
+        }
+        // Validate email input format
+        const emailInput = document.getElementById('email');
+        const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/; // Simple email regex
+        if (emailInput.value.trim() && !emailPattern.test(emailInput.value.trim())) {
+            emailInput.classList.add('error');
+            isValid = false;
+        } else if (emailInput.value.trim()) {
+            emailInput.classList.remove('error');
+        }
+        return isValid; // Return true if all inputs are valid
+    }
+
+    const buttons = [
+        document.getElementById('submit-button'),
+        document.getElementById('save-button')
+    ];
+
+    buttons.forEach(button => {
+        button.addEventListener('click', (event) => {
+            if (!validateInputs()) {
+                event.preventDefault(); // Prevent form submission if any input is empty or invalid
+            }
+        });
+    });
+
+    // Listen for blur events to validate dynamically
+    const inputs = [
+        document.getElementById('fname'),
+        document.getElementById('email'),
+        document.getElementById('phone')
+    ];
+
+    inputs.forEach(input => {
+        input.addEventListener('blur', () => {
+            if (!input.value.trim()) {
+                input.classList.add('error');
+            } else {
+                input.classList.remove('error');
+            }
+
+            if (input.id === 'phone') {
+                const phonePattern = /^\+?972-?\d{9}$|^0\d{1,2}-?\d{7}$/;
+                if (input.value.trim() && !phonePattern.test(input.value.trim())) {
+                    input.classList.add('error');
+                } else {
+                    input.classList.remove('error');
+                }
+            }
+        });
+    });
+
+
+
+
 </script>
 </body>
 </html>

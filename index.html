@@ -89,7 +89,7 @@
                     </span>
                 </label>
                 <label class="agree-checkbox">
-                    <input type="checkbox" class="checkbox" aria-label="מאשר קבלת דיוור ותוכן שיווקי ופרסומי">
+                    <input type="checkbox" class="checkbox" tabindex="0" aria-label="מאשר קבלת דיוור ותוכן שיווקי ופרסומי">
                     <span class="checkmark"></span>
                     <span class="text">
                         מאשר קבלת דיוור ותוכן שיווקי ופרסומי מהחברות השונות בקבוצת  באמצעות סמס, וואטסאפ, דואר אלקטרוני, וחיוג אוטומטי. רשימת *החברות המפורטות במדיניות פרטיות של האתר
@@ -218,13 +218,16 @@
     });
 
     document.querySelector('.dropdown-label').addEventListener('focus', function() {
-        var dropdown = document.getElementById('dropdown');
+        let dropdown = document.getElementById('dropdown');
         dropdown.focus();  // Focus the select element when the label is focused
         dropdown.size = dropdown.options.length;  // Show the dropdown
     });
 
     document.getElementById('dropdown').addEventListener('blur', function() {
         this.size = 0;  // Hide the dropdown when select loses focus
+        setTimeout(() => {
+            document.getElementById('email').focus();
+        },0)
     });
 
 

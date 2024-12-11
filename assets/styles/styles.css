@@ -166,7 +166,9 @@
     height: 5.7rem;
     color: #fff;
     font-size: var(--input-font-size);
-    &:focus{outline: none;}
+    &:focus, &:valid{
+         outline: none; background-color: #000; color: #fff;
+     }
      &.error{
     border-color: #FF3939;
       }
@@ -201,6 +203,9 @@ input[type="tel"] {
             &:after {
                 display: block;
             }
+         }
+        &:focus ~ .checkmark{
+             border-width: 3px;
          }
     }
     .checkmark{

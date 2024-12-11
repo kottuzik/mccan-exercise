@@ -187,7 +187,7 @@ input[type="tel"] {
 .agree-checkbox{
     display: block;
     position: relative;
-    margin-top: 2rem;
+    margin-block: 2rem;
     cursor: pointer;
     font-size: 1.2rem;
     user-select: none;

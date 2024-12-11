@@ -31,6 +31,7 @@
                            class="form-input"
                            tabindex="0"
                            id="fname"
+                           aria-label="שם מלא"
                            placeholder="שם מלא*"
                            onfocus="this.placeholder=''"
                            onblur="this.placeholder='שם מלא*'"
@@ -45,6 +46,7 @@
                            tabindex="0"
                            id="phone"
                            maxlength="10"
+                           aria-label="נייד"
                            placeholder="נייד*"
                            onfocus="this.placeholder=''"
                            onblur="this.placeholder='נייד*'"
@@ -77,6 +79,7 @@
                            class="form-input"
                            tabindex="0"
                            id="email"
+                           aria-label="מייל"
                            placeholder="מייל*"
                            onfocus="this.placeholder=''"
                            onblur="this.placeholder='מייל*'"
@@ -213,6 +216,17 @@
             }
         }
     });
+
+    document.querySelector('.dropdown-label').addEventListener('focus', function() {
+        var dropdown = document.getElementById('dropdown');
+        dropdown.focus();  // Focus the select element when the label is focused
+        dropdown.size = dropdown.options.length;  // Show the dropdown
+    });
+
+    document.getElementById('dropdown').addEventListener('blur', function() {
+        this.size = 0;  // Hide the dropdown when select loses focus
+    });
+
 
 </script>
 </body>

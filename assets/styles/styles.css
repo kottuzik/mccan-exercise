@@ -283,3 +283,9 @@ input[type="tel"] {
         margin-inline: auto;
     }
 }
+@media all and (min-width: 1025px){
+    .main-container{
+        width: 60vw;
+        margin-inline: auto;
+    }
+}
